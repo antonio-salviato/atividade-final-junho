@@ -11,8 +11,8 @@
   "devDependencies": {
     "typescript": "^4.7.3"
   },
-  "description": "",
   "dependencies": {
     "animate.css": "^4.1.1"
-  }
+  },
+  "description": ""
 }
