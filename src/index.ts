@@ -31,7 +31,7 @@ const login = (event: Event) => {
   }
   const dadosLogin = usuarioValido.emailUser;
   sessionStorage.setItem("dadosLogin", JSON.stringify(dadosLogin));
-  localStorage.setItem("dadosLogin", JSON.stringify(dadosLogin));
+  // localStorage.setItem("dadosLogin", JSON.stringify(dadosLogin));
   location.href = "./mural.html";
 };
 

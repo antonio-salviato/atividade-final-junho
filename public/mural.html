@@ -1,81 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css " rel="stylesheet " integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor " crossorigin="anonymous " </head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>Document</title>
-
+    <title>Mural</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
-<body>
-    <div class="body">
-        <div id=" localAlerta " class="d-none "></div>
-        <section>
-            <div class="container-sm ">
-                <div class="row ">
-                    <div class="col-12 justify-content-center " style="color: red ">
-                        <h2 class="text-center animate__animated animate__lightSpeedInRight "> CADASTRO DE MENSAGENS</h2>
-                    </div>
+<body id="app">
+    <header>
+        <div class="h1 text-lg-start text-sm-center m-4 text-danger fw-bold"> MURAL DE RECADOS </div>
+    </header>
+    <main>
+        <div class="container-lg container-sm">
+            <div class="row">
+                <div class="col d-flex mt-4 justify-content-start align-items-center">
+                    <i class="bi bi-calendar-check" style=" font-size: 2rem; color: cornflowerblue "></i>
+                    <span class="fs-2 ms-4 ">Recados</span>
                 </div>
-                <div class="row d-flex justify-content-center align-items-center pt-3 ">
-                    <div class="col-lg-10 col-sm-4 ">
-                        <div class="card bg-light " style="border-radius: 1rem; ">
-                            <form id="mural ">
-                                <div class="row m-2 p-2 ">
-                                    <div class="col-4 ">
-                                        <label for="descricao "><span class="input-group-text ">Título:</span></label>
-                                        <input type="text " id="descricao " name="descricao " maxlength="30 " placeholder="Digite o título " required />
-                                    </div>
-                                    <div class="col-8 d-flex ">
-                                        <label form="msg "><span class="msgem input-group-text ">Mensagem:</span> </label>
-
-                                        <textarea class="form-control " aria-label="With textarea " id="msg " name="msg " maxlength="80 " placeholder="Digite 80 caracteres " required></textarea>
-                                        <!-- <input class="ms-2 d-flex " id="msg " name="msg " maxlength="80 " placeholder="Digite 80 caracteres " required> </input> -->
-                                        </span>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="pt-5 mb-2 d-flex justify-content-center ">
-                                        <button id="submitEnter " class="btn btn-success w-25 rounded-pill " type="button ">Salvar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <br>
-                        <div class="row text-center " style="color: white ">
-                            <div class="col-12 h4 ">MURAL DE RECADOS</div>
-                        </div>
+                <div class="col d-flex mt-4 justify-content-lg-end ">
+                    <div class="text-center ">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#msg-Modal">
+                            <i class="bi bi-plus"></i>
+                          </button>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="d-flex justify-content-center ">
-            <table id="table " class="justify-content-center ">
-                <thead>
+
+            <table class="table table-striped" id="tabela">
+                <thead class="table bg-primary" id="tabelaTopo">
                     <tr>
-                        <th>ID</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>MENSAGEM</th>
-                        <th>AÇÃO</th>
+                        <th id="th1">ID</th>
+                        <th id="th2">TITULO</th>
+                        <th id="th3">MENSAGEM</th>
+                        <th id="th4">Ação</th>
                     </tr>
                 </thead>
-                <tbody id="tbody "></tbody>
+                <tbody id="tbody"></tbody>
             </table>
-        </section>
+        </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js " integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk " crossorigin="anonymous "></script>
+
+        <!-- Modal -->
+        <div class="modal fade" id="msg-Modal" tabindex="-1" aria-labelledby="msg-Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header ">
+                        <h5 class="modal-title fst-italic " id="msg-Modal ">Cadastro de Recado</h5>
+                        <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+                    </div>
+                    <form id="formulario ">
+                        <div class="modal-body ">
+                            <div class="mb-3 ">
+                                <label for="titleInput " class="form-label fw-bold ">Titulo</label>
+                                <input type="text " class="form-control " id="titleInput " maxlength="20 " aria-describedby="emailHelp " placeholder="Digite um breve título ">
+                            </div>
+                            <div class="mb-3 ">
+                                <label for="messageInput" class="form-label fw-bold ">Mensagem</label>
+                                <input type="text " class="form-control " id="messageInput " placeholder="Máx. 80 caracteres " maxlength="80 ">
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button " class="btn btn-danger " data-bs-dismiss="modal ">Cancelar</button>
+                            <button type="button " class="btn btn-success" onclick="salvarMsgem()">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+
+        <script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js " integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk " crossorigin="anonymous "></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js " integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy " crossorigin="anonymous "></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
         <script src="./js/index.js "></script>
         <script src="./js/new.js "></script>
+        <script src="./js/mural.js "></script>
 
-    </div>
+        </div>
 </body>
 
 </html>
