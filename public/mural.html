@@ -6,7 +6,7 @@
     <title>Mural</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body id="app">
@@ -44,22 +44,22 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="msg-Modal" tabindex="-1" aria-labelledby="msg-Modal" aria-hidden="true">
+        <div class="modal fade" id="msg-Modal" tabindex="-1" aria-labelledby="msg-Modal-title" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header ">
-                        <h5 class="modal-title fst-italic " id="msg-Modal ">Cadastro de Recado</h5>
+                        <h5 class="modal-title fst-italic " id="msg-Modal-title ">Cadastro de Recado</h5>
                         <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
                     </div>
                     <form id="formulario ">
                         <div class="modal-body ">
                             <div class="mb-3 ">
                                 <label for="titleInput " class="form-label fw-bold ">Titulo</label>
-                                <input type="text " class="form-control " id="titleInput " maxlength="20 " aria-describedby="emailHelp " placeholder="Digite um breve título ">
+                                <input name="titulo" type="text " class="form-control " id="titleInput" maxlength="20 " aria-describedby="emailHelp " placeholder="Digite um breve título ">
                             </div>
                             <div class="mb-3 ">
                                 <label for="messageInput" class="form-label fw-bold ">Mensagem</label>
-                                <input type="text " class="form-control " id="messageInput " placeholder="Máx. 80 caracteres " maxlength="80 ">
+                                <input name="recado" type="text " class="form-control " id="messageInput" placeholder="Máx. 80 caracteres " maxlength="80 ">
                             </div>
                         </div>
                         <div class="modal-footer ">

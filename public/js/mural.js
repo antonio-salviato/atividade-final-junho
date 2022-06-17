@@ -1,12 +1,14 @@
 "use strict";
-const formulario = document.querySelector("#mural");
+const formulario = document.querySelector("#formulario");
 const corpoTabela = document.querySelector("#tbody");
+//const titulo = document.getElementById("titleInput") as HTMLInputElement;
 const titulo = document.querySelector("#titleInput");
 const recado = document.querySelector("#messageInput");
-const descricao = document.querySelector("#descricao");
+// const descricao = document.querySelector("#descricao") as HTMLFormElement;
 const msgModal = document.querySelector("#msgModal");
 let botaoEditar = false;
 let editIndex = 0;
+const userLogged = JSON.parse(sessionStorage.getItem("dadosLogin") || "");
 const usuarioLogado = () => {
     const userLog = JSON.parse(sessionStorage.getItem("dadosLogin") || "[]");
     return userLog;
@@ -22,10 +24,9 @@ const recuperaMsgLocalStorage = () => {
 };
 function salvarMsgem() {
     // event.preventDefault()
-    const titulo = formulario.titulo.value;
-    const recado = formulario.recado.value;
+    const tit = titulo.value;
+    const rec = recado.value;
     const message = recuperaMsgLocalStorage();
-    alert(titulo);
     const msgUser = usuarioLogado();
     if (msgUser === "[]") {
         alert("Você será redirecionado para fazer seu login");
@@ -37,18 +38,18 @@ function salvarMsgem() {
     const msgem = recuperaMsgLocalStorage();
     if (botaoEditar == true) {
         alert("Mensagem alterada com sucesso");
-        msgem[editIndex].titulo = titulo;
-        msgem[editIndex].recado = recado;
+        msgem[editIndex].titulo = tit;
+        msgem[editIndex].recado = rec;
         botaoEditar = false;
     }
     else {
         msgem.push({
             id: definirID() + 1,
-            titulo: titulo,
-            recado: recado,
+            titulo: tit,
+            recado: rec,
         });
     }
-    atualizaMgsLocalStorage(message);
+    atualizaMgsLocalStorage(msgem);
     alert("Mensagem adicionada!");
     formulario.reset();
     preencherTabela();
@@ -63,8 +64,8 @@ const preencherTabela = () => {
             <td>${message.titulo}</td>
             <td>${message.recado}</td>
             <td>
-            <img src="./assets/edit_ico.svg" alt="editar" width="40" onclick="editar(${message.id})" >
-            <img src="./assets/lixo.svg" alt="imagem de lixeira" width="40" onclick="removeMsg(${message.id})" >
+            <img src="../public/assets/edit_ico.svg" alt="editar" width="40" onclick="editar(${message.id})" >
+            <img src="../public/assets/lixo.svg" alt="imagem de lixeira" width="40" onclick="removeMsg(${message.id})" >
             
             </td>
             </tr>
@@ -74,8 +75,9 @@ const preencherTabela = () => {
 const editar = (id) => {
     const lista = recuperaMsgLocalStorage();
     const indiceMsg = lista.findIndex((message) => message.id === id);
-    formulario.descricao.value = lista[indiceMsg].titulo;
-    formulario.msg.value = lista[indiceMsg].recado;
+    const recado = lista[indiceMsg];
+    formulario.titulo.value = recado.titulo;
+    formulario.recado.value = recado.recado;
     botaoEditar = true;
     editIndex = indiceMsg;
 };
@@ -101,5 +103,8 @@ const definirID = () => {
     });
     return max;
 };
-// formulario.addEventListener("submit", salvarMsgem);
+function sairSistema() {
+    localStorage.removeItem("userLogado");
+    document.location.href = "./index.html";
+}
 document.addEventListener("DOMContentLoaded", preencherTabela);
