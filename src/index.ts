@@ -16,11 +16,10 @@ const recuperaLocalStorage = (): Array<Iuser> => {
 };
 
 const login = (event: Event) => {
- 
   const users: Array<Iuser> = recuperaLocalStorage();
   const emailUser: string = formularioLogin?.emailUser.value;
   const pass: string = formularioLogin?.pass.value;
-  console.log(formularioLogin)
+  console.log(formularioLogin);
   const usuarioValido = users.find(
     (usuario) => usuario.emailUser === emailUser && usuario.pass === pass
   );
@@ -31,8 +30,6 @@ const login = (event: Event) => {
   }
   const dadosLogin = usuarioValido.emailUser;
   sessionStorage.setItem("dadosLogin", JSON.stringify(dadosLogin));
-  // localStorage.setItem("dadosLogin", JSON.stringify(dadosLogin));
+
   location.href = "./mural.html";
 };
-
-
