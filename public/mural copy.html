@@ -1,0 +1,116 @@
+<!-- <!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mural</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body id="app">
+    <header>
+        <div class="h1 text-lg-start text-sm-center m-4 text-danger fw-bold"> MURAL DE RECADOS </div>
+    </header>
+    <main>
+        <div class="container-lg container-sm">
+            <div class="row">
+                <div class="col d-flex mt-4 justify-content-start align-items-center">
+                    <i class="bi bi-calendar-check" style=" font-size: 2rem; color: cornflowerblue "></i>
+                    <span class="fs-2 ms-4 ">Recados</span>
+                </div>
+                <div class="col d-flex mt-4 justify-content-lg-end ">
+                    <div class="text-center ">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#msg-Modal">
+                            <i class="bi bi-plus"></i>
+                          </button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped" id="tabela">
+                <thead class="table bg-primary" id="tabelaTopo">
+                    <tr>
+                        <th id="th1">ID</th>
+                        <th id="th2">TITULO</th>
+                        <th id="th3">MENSAGEM</th>
+                        <th id="th4">Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+
+            </table>
+        </div>
+
+
+        <!-- Modal -->
+<div class="modal fade" id="msg-Modal" tabindex="-1" aria-labelledby="msg-Modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title fst-italic " id="msg-Modal-title ">Cadastro de Recado</h5>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <form id="formulario ">
+                <div class="modal-body ">
+                    <div class="mb-3 ">
+                        <label for="titleInput " class="form-label fw-bold ">Titulo</label>
+                        <input name="titulo" type="text " class="form-control " id="titleInput" maxlength="20 " aria-describedby="emailHelp " placeholder="Digite um breve título ">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="messageInput" class="form-label fw-bold ">Mensagem</label>
+                        <input name="recado" type="text " class="form-control " id="messageInput" placeholder="Máx. 80 caracteres " maxlength="80 ">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-danger " data-bs-dismiss="modal ">Cancelar</button>
+                    <button type="button " class="btn btn-success" onclick="salvarMsgem()">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal - Editar -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title fst-italic " id="editModal-title ">Atualizar Recado</h5>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <form id="formulario ">
+                <div class="modal-body ">
+                    <div class="mb-3 ">
+                        <label for="titleInputEdit " class="form-label fw-bold ">Titulo</label>
+                        <input name="titulo" type="text " class="form-control " id="titleInputEdit" maxlength="20 " aria-describedby="emailHelp " placeholder="Digite um breve título ">
+                    </div>
+                    <div class="mb-3 ">
+                        <label for="messageInputEditar" class="form-label fw-bold ">Mensagem</label>
+                        <input name="recado" type="text " class="form-control " id="messageInputEditar" placeholder="Máx. 80 caracteres " maxlength="80 ">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button " class="btn btn-danger " data-bs-dismiss="modal ">Cancelar</button>
+                    <button type="button " class="btn btn-success" id="botaoEditar" onclick="salvarMsgem()">Atualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js " integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk " crossorigin="anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js " integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy " crossorigin="anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
+<script src="./js/index.js "></script>
+<script src="./js/new.js "></script>
+<script src="./js/mural.js "></script>
+
+</div>
+</body>
+
+</html> -->

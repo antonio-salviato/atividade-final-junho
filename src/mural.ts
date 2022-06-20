@@ -2,8 +2,6 @@ const formulario = document.querySelector("#formulario") as HTMLFormElement;
 const corpoTabela = document.querySelector("#tbody") as HTMLTableElement;
 const titulo = document.querySelector("#titleInput") as HTMLInputElement;
 const recado = document.querySelector("#messageInput") as HTMLInputElement;
-// // const msgModal = document.querySelector("#msg-Modal") as HTMLInputElement;
-// const modalEditar = document.querySelector("#msg-Modal") as HTMLElement;
 let botaoEditar: boolean = false;
 let editIndex: number = 0;
 
