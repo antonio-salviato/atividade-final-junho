@@ -1,11 +1,10 @@
 "use strict";
 const formulario = document.querySelector("#formulario");
 const corpoTabela = document.querySelector("#tbody");
-//const titulo = document.getElementById("titleInput") as HTMLInputElement;
 const titulo = document.querySelector("#titleInput");
 const recado = document.querySelector("#messageInput");
-// const descricao = document.querySelector("#descricao") as HTMLFormElement;
-const msgModal = document.querySelector("#msgModal");
+// // const msgModal = document.querySelector("#msg-Modal") as HTMLInputElement;
+// const modalEditar = document.querySelector("#msg-Modal") as HTMLElement;
 let botaoEditar = false;
 let editIndex = 0;
 const userLogged = JSON.parse(sessionStorage.getItem("dadosLogin") || "");
@@ -23,9 +22,12 @@ const recuperaMsgLocalStorage = () => {
     return mensage;
 };
 function salvarMsgem() {
-    // event.preventDefault()
-    const tit = titulo.value;
-    const rec = recado.value;
+    let form = document.getElementById("formulario");
+    if (botaoEditar == true) {
+        form = document.getElementById("formulario_edit");
+    }
+    const tit = form.titulo.value;
+    const rec = form.recado.value;
     const message = recuperaMsgLocalStorage();
     const msgUser = usuarioLogado();
     if (msgUser === "[]") {
@@ -64,8 +66,8 @@ const preencherTabela = () => {
             <td>${message.titulo}</td>
             <td>${message.recado}</td>
             <td>
-            <img src="../public/assets/edit_ico.svg" alt="editar" width="40" onclick="editar(${message.id})" >
-            <img src="../public/assets/lixo.svg" alt="imagem de lixeira" width="40" onclick="removeMsg(${message.id})" >
+            <i class="bi bi-pencil-square ms-2"onclick="editar(${message.id})" data-bs-toggle="modal" data-bs-target="#editModal"></i>
+            <i class="bi bi-trash me-4 ms-4" onclick="removeMsg(${message.id})" ></i>
             
             </td>
             </tr>
@@ -76,8 +78,10 @@ const editar = (id) => {
     const lista = recuperaMsgLocalStorage();
     const indiceMsg = lista.findIndex((message) => message.id === id);
     const recado = lista[indiceMsg];
-    formulario.titulo.value = recado.titulo;
-    formulario.recado.value = recado.recado;
+    const form = document.getElementById("formulario_edit");
+    console.log(recado);
+    form.titulo.value = recado.titulo;
+    form.recado.value = recado.recado;
     botaoEditar = true;
     editIndex = indiceMsg;
 };

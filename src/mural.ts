@@ -1,10 +1,9 @@
 const formulario = document.querySelector("#formulario") as HTMLFormElement;
 const corpoTabela = document.querySelector("#tbody") as HTMLTableElement;
-//const titulo = document.getElementById("titleInput") as HTMLInputElement;
 const titulo = document.querySelector("#titleInput") as HTMLInputElement;
 const recado = document.querySelector("#messageInput") as HTMLInputElement;
-// const descricao = document.querySelector("#descricao") as HTMLFormElement;
-const msgModal = document.querySelector("#msgModal") as HTMLInputElement;
+// // const msgModal = document.querySelector("#msg-Modal") as HTMLInputElement;
+// const modalEditar = document.querySelector("#msg-Modal") as HTMLElement;
 let botaoEditar: boolean = false;
 let editIndex: number = 0;
 
@@ -36,14 +35,16 @@ const recuperaMsgLocalStorage = (): Array<Mensagem> => {
   return mensage;
 };
 
-
 function salvarMsgem(): void {
-  // event.preventDefault()
-  const tit: string = titulo.value;
-  const rec: string = recado.value;
+  let form = document.getElementById("formulario") as HTMLFormElement;
+  if(botaoEditar == true) {
+    form = document.getElementById("formulario_edit") as HTMLFormElement;
+  }
+  const tit: string = form.titulo.value;
+  const rec: string = form.recado.value;
   const message: Array<Mensagem> = recuperaMsgLocalStorage();
 
-   const msgUser: string = usuarioLogado();
+  const msgUser: string = usuarioLogado();
   if (msgUser === "[]") {
     alert("Você será redirecionado para fazer seu login");
 
@@ -84,25 +85,25 @@ const preencherTabela = () => {
             <td>${message.titulo}</td>
             <td>${message.recado}</td>
             <td>
-            <img src="../public/assets/edit_ico.svg" alt="editar" width="40" onclick="editar(${message.id})" >
-            <img src="../public/assets/lixo.svg" alt="imagem de lixeira" width="40" onclick="removeMsg(${message.id})" >
+            <i class="bi bi-pencil-square ms-2"onclick="editar(${message.id})" data-bs-toggle="modal" data-bs-target="#editModal"></i>
+            <i class="bi bi-trash me-4 ms-4" onclick="removeMsg(${message.id})" ></i>
             
             </td>
             </tr>
             `;
   }
 };
-
 const editar = (id: any) => {
-    const lista = recuperaMsgLocalStorage();
-      const indiceMsg = lista.findIndex((message) => message.id === id);
-      const recado = lista[indiceMsg];
-      formulario.titulo.value = recado.titulo;
-     formulario.recado.value = recado.recado;
-      botaoEditar = true;
-    editIndex = indiceMsg;
-  };
-
+  const lista = recuperaMsgLocalStorage();
+  const indiceMsg = lista.findIndex((message) => message.id === id);
+  const recado = lista[indiceMsg];
+  const form = document.getElementById("formulario_edit") as HTMLFormElement;
+  console.log(recado);
+  form.titulo.value = recado.titulo;
+  form.recado.value = recado.recado;
+  botaoEditar = true;
+  editIndex = indiceMsg;
+};
 
 const removeMsg = (id: any) => {
   if (confirm("Você tem certeza que deseja apagar esse recado?")) {
@@ -127,8 +128,8 @@ const definirID = () => {
   return max;
 };
 function sairSistema() {
-    localStorage.removeItem("userLogado");
-    document.location.href = "./index.html";
+  localStorage.removeItem("userLogado");
+  document.location.href = "./index.html";
 }
 
 document.addEventListener("DOMContentLoaded", preencherTabela);
